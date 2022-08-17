@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS notable;
+
+CREATE DATABASE notable;
+
+\c notable;
+
+CREATE TABLE doctors(
+  docID SERIAL PRIMARY KEY NOT NULL,
+  firstName VARCHAR(30) NOT NULL,
+  lastName VARCHAR(30) NOT NULL,
+);
+
+CREATE TABLE Appointments (
+ id SERIAL PRIMARY KEY NOT NULL,
+ patFirstName VARCHAR(30) NOT NULL DEFAULT 'NULL',
+ patLastName VARCHAR(30) NOT NULL DEFAULT 'NULL',
+ date DATE NOT NULL DEFAULT 'NULL',
+ time TIME,
+ kind VARCHAR(25),
+ docID INTEGER NOT NULL
+);
+
+ALTER TABLE Appointments ADD CONSTRAINT Appointments_docID_fkey FOREIGN KEY (docID) REFERENCES doctors(docID);
